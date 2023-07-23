@@ -14,8 +14,8 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Empty } from "@/components/Empty";
-import { Loader } from "@/components/Loader";
+import { Empty } from "@/components/empty";
+import { Loader } from "@/components/loader";
 import { useProModal } from "@/hooks/use-pro-modal";
 
 const MusicPage = () => {

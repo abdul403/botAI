@@ -7,7 +7,7 @@ import { Code, Divide } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChatCompletionRequestMessage } from "openai";
-import {toast} from 'react-hot-toast'
+import { toast } from "react-hot-toast";
 
 import { Heading } from "@/components/heading";
 import { formSchema } from "./constants";
@@ -16,8 +16,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { Empty } from "@/components/Empty";
-import { Loader } from "@/components/Loader";
+import { Empty } from "@/components/empty";
+import { Loader } from "@/components/loader";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
