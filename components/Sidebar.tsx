@@ -4,6 +4,8 @@ import { Montserrat } from "next/font/google";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { FreeCounter } from "./free-counter";
+
 import {
   LayoutDashboard,
   MessageSquare,
@@ -29,12 +31,12 @@ const routes = [
     label: "Conversation",
     icon: MessageSquare,
     href: "/conversations",
-    color: "text-voilet-700",
+    color: "text-violet-700",
   },
   {
     label: "Image Generation",
     icon: ImageIcon,
-    href: "/image",
+    href: "/images",
     color: "text-pink-700",
   },
   {
@@ -62,7 +64,12 @@ const routes = [
   },
 ];
 
-const Sidebar = () => {
+interface SidebarProps {
+  apiLimitCount: number;
+  isPro: boolean;
+}
+
+const Sidebar = ({ apiLimitCount = 0, isPro = false }: SidebarProps) => {
   const pathname = usePathname();
 
   return (
@@ -96,6 +103,7 @@ const Sidebar = () => {
           ))}
         </div>
       </div>
+      <FreeCounter isPro={isPro} apiLimitCount={apiLimitCount} />
     </div>
   );
 };

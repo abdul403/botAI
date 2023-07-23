@@ -3,10 +3,11 @@
 import axios from "axios";
 import * as z from "zod";
 import { useRouter } from "next/navigation";
-import { Code } from "lucide-react";
+import { Code, Divide } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChatCompletionRequestMessage } from "openai";
+import {toast} from 'react-hot-toast'
 
 import { Heading } from "@/components/heading";
 import { formSchema } from "./constants";
@@ -19,6 +20,8 @@ import { Empty } from "@/components/Empty";
 import { Loader } from "@/components/Loader";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 const CodePage = () => {
   const router = useRouter();
@@ -30,6 +33,8 @@ const CodePage = () => {
       prompt: "",
     },
   });
+
+  const proModal = useProModal();
 
   const isLoading = form.formState.isSubmitting;
 
@@ -50,7 +55,11 @@ const CodePage = () => {
 
       form.reset();
     } catch (error: any) {
-      console.log(error);
+      if (error?.response?.status === 403) {
+        proModal.onOpen();
+      } else {
+        toast.error("Something went wrong");
+      }
     } finally {
       router.refresh();
     }
@@ -95,7 +104,7 @@ const CodePage = () => {
                       focus-visible:ring-transparent
                       "
                         disabled={isLoading}
-                        placeholder="How to toggle a button using React hooks"
+                        placeholder="ex: How to toggle a button using React hooks?"
                         {...field}
                       />
                     </FormControl>
@@ -133,7 +142,25 @@ const CodePage = () => {
                 )}
               >
                 {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
-                <p className="text-sm"> {message.content} </p>
+
+                <ReactMarkdown
+                  components={{
+                    pre: ({ node, ...props }) => (
+                      <div className="rounded-lg w-full bg-black/10 mt-2 overflow-auto p24">
+                        <pre {...props} />
+                      </div>
+                    ),
+                    code: ({ node, ...props }) => (
+                      <code
+                        className="rounded-lg p-1 bg-black/10 text-green-600"
+                        {...props}
+                      />
+                    ),
+                  }}
+                  className="overflow-hidden text-sm leading-7 "
+                >
+                  {message.content || ""}
+                </ReactMarkdown>
               </div>
             ))}
           </div>

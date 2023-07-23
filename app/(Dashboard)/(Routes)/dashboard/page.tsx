@@ -23,7 +23,7 @@ const tools = [
   {
     label: "Image Generation",
     icon: ImageIcon,
-    href: "/image",
+    href: "/images",
     color: "text-pink-700",
     bgColor: "bg-pink-700/10",
   },
