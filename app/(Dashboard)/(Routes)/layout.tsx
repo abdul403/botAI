@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/navbar";
 import Sidebar from "@/components/Sidebar";
 import { getApiLimitCount } from "@/lib/api-limit";
 import { checkSubscription } from "@/lib/subscription";
@@ -17,7 +17,6 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
         <Sidebar isPro={isPro} apiLimitCount={apiLimitCount} />
       </div>
       <main className="md:pl-72">
-        {/* @ts-expect-error Async Server Component */}
         <Navbar />
         {children}
       </main>
