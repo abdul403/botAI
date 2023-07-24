@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Empty } from "@/components/ui/empty";
-import { Loader } from "@/components/loader";
+import Loader from "@/components/ui/loader";
 import {
   Select,
   SelectValue,
